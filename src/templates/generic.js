@@ -10,7 +10,7 @@ class Generic extends Component {
 
   render() {
 
-    const { description } = this.props.data.contentfulGenericSection
+    //const { description } = this.props.data.contentfulGenericSection
     return (
       <Layout>
           <Helmet>
@@ -25,7 +25,7 @@ class Generic extends Component {
                           <h1>header</h1>
                       </header>
                       <span className="image main"><img src={this.props.data.contentfulAsset.file.url} alt="" /></span>
-                      <div dangerouslySetInnerHTML={{__html: description.childMarkdownRemark.html}}></div>
+                    {/*  <div dangerouslySetInnerHTML={{__html: description.childMarkdownRemark.html}}></div> */}
                   </div>
               </section>
           </div>
