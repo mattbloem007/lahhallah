@@ -37,7 +37,7 @@ class Generic extends Component {
 export default Generic
 
 export const pageQuery = graphql`
-  query genericQuery($slug: String!){
+  query genericQuery(){
     contentfulGenericSection(slug: {eq: "cacao"}) {
       header
       description {
