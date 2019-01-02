@@ -10,32 +10,36 @@ import pic10 from '../assets/images/pic10.jpg'
 
 class Landing extends Component {
 
+  componentDidMount() {
+    console.log(this.props.data.prismicLanding)
+  }
+
   render() {
 
-    const { description, title } = this.props.data.contentfulLanding
+    const { header, desc } = this.props.data.prismicLanding.data
     //const { description } = this.props.data.contentfulLandingSection.description
 
     return (
       <Layout>
         <Helmet>
-            <title>{title}</title>
+            <title>{header.text}</title>
             <meta name="description" content="Landing Page" />
         </Helmet>
 
-        <BannerLanding title={title} description={description}/>
+        <BannerLanding title={header.text} description={desc.text}/>
 
         <div id="main">
-            <section id="one">
+{      /**      <section id="one">
                 <div className="inner">
                     <header className="major">
-                        <h2>{title}</h2>
+                        <h2>{header.text}</h2>
                     </header>
-                    <p>{description}</p>
+                    <p>{desc.text}</p>
                 </div>
-            </section>
+            </section> */}
             <section id="two" className="spotlights">
               {
-                this.props.data.allContentfulLandingSection.edges.map((edge) => {
+                this.props.data.allPrismicLandingsection.edges.map((edge) => {
                   return (
                     <section>
                         <Link to="/generic" className="image">
@@ -44,11 +48,11 @@ class Landing extends Component {
                         <div className="content">
                             <div className="inner">
                                 <header className="major">
-                                    <h3>{edge.node.header}</h3>
+                                    <h3>{edge.node.data.header.text}</h3>
                                 </header>
-                                <p>{edge.node.description.description}</p>
+                                <p>{edge.node.data.desc.text}</p>
                                 <ul className="actions">
-                                    <li><Link to={"/" + edge.node.slug} className="button">Learn more</Link></li>
+                                    <li><Link to={"/" + edge.node.uid} className="button">Learn more</Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -67,22 +71,49 @@ class Landing extends Component {
 export default Landing
 
 export const pageQuery = graphql`
-  query landingQuery($section: String!, $slug: String!) {
-    contentfulLanding(slug: {eq: $slug}){
-      title
-      description
-    }
-    allContentfulLandingSection(filter:{section: {eq: $section}}) {
-      edges {
-        node {
-          header
-          slug
-          description {
-            description
+query ($slugs: String!) {
+  prismicLanding (tags: {eq: $slugs}){
+   id
+   uid
+   data{
+     header {
+       html
+       text
+     }
+     desc {
+       html
+       text
+     }
+     section {
+            html
+            text
+          }
+   }
+ }
+
+  allPrismicLandingsection (filter:{tags: {eq: $slugs} }){
+    edges{
+      node{
+        uid
+        id
+        data{
+          header {
+            html
+            text
+          }
+          desc {
+            html
+            text
+          }
+          section {
+            html
+            text
           }
         }
       }
-
     }
   }
+
+
+}
 `

@@ -13,9 +13,13 @@
     "gatsby-plugin-react-helmet": "^3.0.0",
     "gatsby-plugin-sass": "^2.0.1",
     "gatsby-source-contentful": "^2.0.3",
+    "gatsby-source-prismic": "^2.2.0",
     "gatsby-transformer-remark": "^2.1.7",
+    "moment": "^2.23.0",
     "node-sass": "^4.9.3",
+    "rc-calendar": "^9.8.2",
     "react": "^16.5.1",
+    "react-big-calendar": "^0.20.2",
     "react-dom": "^16.5.1",
     "react-helmet": "^5.2.0"
   },

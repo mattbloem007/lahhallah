@@ -5,56 +5,157 @@ exports.createPages = ({graphql, boundActionCreators}) => {
   return new Promise((resolve, reject) => {
     const genericTemplate = path.resolve('src/templates/generic.js')
     const landingTemplate = path.resolve('src/templates/landing.js')
+    const blogTemplate = path.resolve('src/templates/blog.js')
+    const blogpostTemplate = path.resolve('src/templates/blog-post.js')
     resolve(
       graphql(`
         {
-         allContentfulHomePage {
-            edges {
-              node {
-                header
-                slug
-                description
-              }
-            }
-          }
-          allContentfulLandingSection {
-            edges {
-              node {
-                header
-                title
-                slug
-                description {
-                  description
+
+          allPrismicBlogt{
+            edges{
+              node{
+                uid
+                id
+                data{
+                  header {
+                    html
+                    text
+                  }
+                  snippet {
+                    html
+                    text
+                  }
                 }
               }
             }
           }
+
+          allPrismicBlogpost {
+            edges{
+              node{
+                tags
+                uid
+                data{
+                  header {
+                    html
+                    text
+                  }
+                  blogpost {
+                    html
+                    text
+                  }
+                  img {
+                    alt
+                    copyright
+                    url
+                  }
+                }
+              }
+            }
+          }
+
+          allPrismicGenericsection{
+            edges{
+              node{
+                uid
+                id
+                data{
+                  header {
+                    html
+                    text
+                  }
+                  img {
+                    alt
+                    copyright
+                    url
+                  }
+                  desc {
+                    html
+                    text
+                  }
+                }
+              }
+            }
+          }
+
+            allPrismicLandingsection{
+              edges{
+                node{
+                  uid
+                  id
+                  data{
+                    path{
+                      text
+                    }
+                    section {
+                      html
+                      text
+                    }
+                    header {
+                      html
+                      text
+                    }
+                    desc {
+                      html
+                      text
+                    }
+          				}
+                }
+              }
+            }
 }
       `).then((result) => {
         if (result.errors) {
           reject(result.errors)
         }
-        const homeList = result.data.allContentfulHomePage.edges;
-        const sectionList = result.data.allContentfulLandingSection.edges;
+        const genericList = result.data.allPrismicGenericsection.edges;
+        const sectionList = result.data.allPrismicLandingsection.edges;
+        const blogList = result.data.allPrismicBlogt.edges;
+        const blogpostList = result.data.allPrismicBlogpost.edges;
 
-        homeList.forEach((edge) => {
+        console.log(genericList)
+        console.log(sectionList)
+
+        genericList.forEach((edge) => {
           createPage({
-            path: edge.node.slug,
-            component: landingTemplate,
+            path: edge.node.uid,
+            component: genericTemplate,
             context: {
-              slug: edge.node.slug,
-              section: edge.node.slug
+              slugs: edge.node.uid,
+              id: edge.node.id
             }
           })
         })
 
         sectionList.forEach((edge) => {
           createPage({
-            path: edge.node.slug,
-            component: genericTemplate,
+            path: edge.node.data.path.text,
+            component: landingTemplate,
             context: {
-              slug: edge.node.slug,
-              title: edge.node.title
+              slugs: edge.node.data.path.text,
+              id: edge.node.id
+            }
+          })
+        })
+
+        blogList.forEach((edge) => {
+          createPage({
+            path: edge.node.uid,
+            component: blogTemplate,
+            context: {
+              slugs: edge.node.uid,
+              id: edge.node.id
+            }
+          })
+        })
+
+        blogpostList.forEach((edge) => {
+          createPage({
+            path: edge.node.uid,
+            component: blogpostTemplate,
+            context: {
+              slugs: edge.node.uid,
+              id: edge.node.id
             }
           })
         })

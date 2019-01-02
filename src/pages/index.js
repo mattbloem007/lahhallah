@@ -3,6 +3,11 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import Layout from '../components/layout'
 import Banner from '../components/Banner'
+import Calendar from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+
+
 
 import pic01 from '../assets/images/pic01.jpg'
 import pic02 from '../assets/images/pic02.jpg'
@@ -11,7 +16,12 @@ import pic04 from '../assets/images/pic04.jpg'
 import pic05 from '../assets/images/pic05.jpg'
 import pic06 from '../assets/images/pic06.jpg'
 
+const localizer = Calendar.momentLocalizer(moment);
+
+
 class HomeIndex extends React.Component {
+
+
     render() {
         return (
             <Layout>
@@ -29,14 +39,14 @@ class HomeIndex extends React.Component {
                 <div id="main">
                     <section id="one" className="tiles">
                       {
-                        this.props.data.allContentfulHomePage.edges.map((edge) => {
+                        this.props.data.allPrismicHomepage.edges.map((edge) => {
                           return (
                             <article key={edge.node.id} style={{backgroundImage: `url(${pic01})`}}>
                                 <header className="major">
-                                    <h3>{edge.node.header}</h3>
-                                    <p>{edge.node.description}</p>
+                                    <h3>{edge.node.data.header.text}</h3>
+                                    <p>{edge.node.data.content1.text}</p>
                                 </header>
-                                <Link to= {"/" + edge.node.slug} className="link primary"></Link>
+                                <Link to= {"/" + edge.node.uid} className="link primary"></Link>
                             </article>
                           )
                         })
@@ -46,12 +56,22 @@ class HomeIndex extends React.Component {
                     <section id="two">
                         <div className="inner">
                             <header className="major">
-                                <h2>More To Come</h2>
+                                <h2>Current Happenings</h2>
                             </header>
                             <p>Stay tuned for more goodies to be added to the site!</p>
-                            <ul className="actions">
-                                <li><a href="#one" className="button next">Get Started</a></li>
-                            </ul>
+                              <Calendar
+                                localizer={localizer}
+                                defaultDate={new Date()}
+                                defaultView="month"
+                                events={[
+                                  {
+                                    start: new Date(),
+                                    end: new Date(moment().add(1, "days")),
+                                    title: "Some title"
+                                  }
+                                ]}
+                                style={{ height: "100vh" }}
+                              />
                         </div>
                     </section>
                 </div>
@@ -64,16 +84,25 @@ class HomeIndex extends React.Component {
 export default HomeIndex
 
 export const pageQuery = graphql`
-query {
-  allContentfulHomePage{
-    edges{
-      node{
-        id
-        header
-        slug
-        description
+{
+  allPrismicHomepage{
+      edges{
+        node{
+          uid
+        	id
+          data {
+            header {
+              html
+              text
+            }
+            content1 {
+              html
+              text
+            }
+          }
+        }
       }
     }
-  }
 }
+
 `
