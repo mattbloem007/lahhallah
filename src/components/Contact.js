@@ -1,6 +1,7 @@
 import React from 'react'
 import {StaticQuery, graphql} from 'gatsby'
 import * as emailjs from 'emailjs-com'
+import toastr from 'toastr'
 
 class Contact extends React.Component {
 
@@ -9,11 +10,53 @@ class Contact extends React.Component {
     this.state = {
       name: "",
       email: "",
-      message: ""
+      message: "",
+      errors: {
+        name: "",
+        email: "",
+        message: ""
+      }
     }
   }
 
+  validateMail() {
+    let errors = {};
+    let formIsValid = true;
+
+    if (!this.state.name || this.state.name < 3) {
+      errors.name = 'Minimum 3 symbols'
+      formIsValid = false
+    }
+
+    if (!this.state.message || this.state.message < 10) {
+      errors.message = 'Minimum 10 symbols'
+      formIsValid = false
+    }
+
+    if (!this.state.email || this.state.email < 3) {
+      errors.email = 'Minimum 3 symbols'
+      formIsValid = false
+    }
+
+    let pattern = /^\w+([.-]?\w+)*@\w+([.-]?]\w+)*(\.\w{2,3})+$/
+
+    if (!pattern.test(this.state.email)) {
+      errors.email = "This is not a valid email"
+      formIsValid = false
+    }
+
+    this.setState({errors: errors})
+
+    return formIsValid
+
+  }
+
   handleEmail = () => {
+
+    if (!this.validateMail()) {
+      return
+    }
+
     var template_params = {
      "reply_to": this.state.email,
      "from_name": this.state.name,
@@ -23,7 +66,14 @@ class Contact extends React.Component {
 
     var service_id = "gmail";
     var template_id = "template_m9OkeQLI";
-    emailjs.send(service_id,template_id,template_params, "user_wLPGPl2w2ETFdTUDNZQP2");
+    emailjs.send(service_id,template_id,template_params, "user_wLPGPl2w2ETFdTUDNZQP2")
+    .then(function(response) {
+      toastr.success("Message Sent Successfully")
+    }, function (err) {
+      toastr.error(err)
+      console.log(err)
+    })
+
     this.setState({
       name: "",
       email: "",
