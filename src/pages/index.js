@@ -85,7 +85,7 @@ export default HomeIndex
 
 export const pageQuery = graphql`
 {
-  allPrismicHomepage{
+  allPrismicHomepage (sort: {fields:data___orderid___text, order:ASC}){
       edges{
         node{
           uid

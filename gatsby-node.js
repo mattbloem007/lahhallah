@@ -83,6 +83,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
                 node{
                   uid
                   id
+                  tags
                   data{
                     path{
                       text
@@ -129,10 +130,10 @@ exports.createPages = ({graphql, boundActionCreators}) => {
 
         sectionList.forEach((edge) => {
           createPage({
-            path: edge.node.data.path.text,
+            path: edge.node.tags[0],
             component: landingTemplate,
             context: {
-              slugs: edge.node.data.path.text,
+              slugs: edge.node.tags[0],
               id: edge.node.id
             }
           })
