@@ -142,7 +142,7 @@ class sessionBookings extends React.Component {
                               </div>
                               <div className="col-12">
                                   <ul className="actions">
-                                      <li><input value="Book Consultation" className="special" onClick={this.handleEmail}/></li>
+                                      <li><button value="Book Session" className="special" onClick={this.handleEmail}>Book Session</button></li>
                                       <li><input type="reset" value="Reset" /></li>
                                   </ul>
                               </div>
