@@ -4,11 +4,16 @@ import Helmet from 'react-helmet'
 import Layout from '../components/layout'
 import BannerLanding from '../components/BannerLanding'
 import ShowMoreText from 'react-show-more-text';
+import Calendar from "react-big-calendar";
+import moment from "moment";
+
 
 
 import pic08 from '../assets/images/pic08.jpg'
 import pic09 from '../assets/images/pic09.jpg'
 import pic10 from '../assets/images/pic10.jpg'
+const localizer = Calendar.momentLocalizer(moment);
+
 
 class Landing extends Component {
 
@@ -58,6 +63,8 @@ class Landing extends Component {
                                 </header>
                                 <ShowMoreText lines={3} more='Show more' less='Show less' anchorClass='' onClick={this.executeOnClick}>
                                   <div dangerouslySetInnerHTML={{__html: edge.node.data.desc.html}}></div>
+                                  <div dangerouslySetInnerHTML={{__html: edge.node.data.code.text}}></div>
+
                                 </ShowMoreText>
                                 <br></br>
                                 <ul className="actions">
@@ -69,6 +76,27 @@ class Landing extends Component {
                   )
                 })
               }
+            </section>
+            <section id="two">
+                <div className="inner">
+                    <header className="major">
+                        <h2>Current Happenings</h2>
+                    </header>
+                    <p>Stay tuned for more goodies to be added to the site!</p>
+                      <Calendar
+                        localizer={localizer}
+                        defaultDate={new Date()}
+                        defaultView="month"
+                        events={[
+                          {
+                            start: new Date(),
+                            end: new Date(moment().add(1, "days")),
+                            title: "Some title"
+                          }
+                        ]}
+                        style={{ height: "100vh" }}
+                      />
+                </div>
             </section>
         </div>
 
@@ -111,6 +139,10 @@ query ($slugs: String!) {
             text
           }
           desc {
+            html
+            text
+          }
+          code {
             html
             text
           }

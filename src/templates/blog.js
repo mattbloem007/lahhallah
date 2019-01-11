@@ -3,6 +3,8 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 import Layout from '../components/layout'
 import Banner from '../components/Banner'
+import Calendar from "react-big-calendar";
+import moment from "moment";
 
 
 
@@ -12,6 +14,8 @@ import pic03 from '../assets/images/pic03.jpg'
 import pic04 from '../assets/images/pic04.jpg'
 import pic05 from '../assets/images/pic05.jpg'
 import pic06 from '../assets/images/pic06.jpg'
+const localizer = Calendar.momentLocalizer(moment);
+
 
 
 
@@ -59,6 +63,27 @@ class Blog extends React.Component {
                           )
                         })
                       }
+                    </section>
+                    <section id="two">
+                        <div className="inner">
+                            <header className="major">
+                                <h2>Current Happenings</h2>
+                            </header>
+                            <p>Stay tuned for more goodies to be added to the site!</p>
+                              <Calendar
+                                localizer={localizer}
+                                defaultDate={new Date()}
+                                defaultView="month"
+                                events={[
+                                  {
+                                    start: new Date(),
+                                    end: new Date(moment().add(1, "days")),
+                                    title: "Some title"
+                                  }
+                                ]}
+                                style={{ height: "100vh" }}
+                              />
+                        </div>
                     </section>
                 </div>
 

@@ -18,6 +18,7 @@
     "gatsby-transformer-remark": "^2.1.7",
     "moment": "^2.23.0",
     "node-sass": "^4.9.3",
+    "prismic-reactjs": "^0.3.2",
     "rc-calendar": "^9.8.2",
     "react": "^16.5.1",
     "react-big-calendar": "^0.20.2",

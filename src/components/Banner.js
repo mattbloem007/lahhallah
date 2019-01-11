@@ -31,9 +31,9 @@ const Banner = ({data}) => {
                   </header>
                   <div className="content">
                       <p>{data.prismicBanner.data.description.text}</p>
-                      <ul className="actions">
+{          /**            <ul className="actions">
                           <li><a href="#one" className="button next scrolly">Get Started</a></li>
-                      </ul>
+                      </ul> */}
                   </div>
               </div>
           </section>
