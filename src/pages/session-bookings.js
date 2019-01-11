@@ -95,7 +95,7 @@ class sessionBookings extends React.Component {
                 <section id="banner" className="major">
                     <div className="inner">
                         <header className="major">
-                            <h1>Book for a consultation with Lah</h1>
+                            <h1>Book for a session with Lah</h1>
                         </header>
                     </div>
                 </section>
