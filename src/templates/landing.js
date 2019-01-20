@@ -51,10 +51,11 @@ class Landing extends Component {
             <section id="two" className="spotlights">
               {
                 this.props.data.allPrismicLandingsection.edges.map((edge) => {
+                  var boolValue = (edge.node.data.button == "true")
                   return (
                     <section>
                         <Link to="/generic" className="image">
-                            <img src={pic08} alt="" />
+                            <img src={edge.node.data.img.url} alt="" />
                         </Link>
                         <div className="content">
                             <div className="inner">
@@ -67,9 +68,15 @@ class Landing extends Component {
 
                                 </ShowMoreText>
                                 <br></br>
-                                <ul className="actions">
-                                    <li><Link to={"/" + edge.node.data.path.text} className="button">Learn more</Link></li>
-                                </ul>
+                                {
+                                  boolValue ?
+                                  (<ul className="actions">
+                                      <li><Link to={"/" + edge.node.data.path.text} className="button">Learn more</Link></li>
+                                  </ul>)
+                                  :
+                                  <div></div>
+                                }
+
                             </div>
                         </div>
                     </section>
@@ -153,9 +160,13 @@ query ($slugs: String!) {
             html
             text
           }
+          img{
+            url
+          }
           path {
             text
           }
+          button
         }
       }
     }

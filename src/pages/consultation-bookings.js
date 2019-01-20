@@ -82,12 +82,39 @@ class consultationBookings extends React.Component {
                         <header className="major">
                             <h1>Book for a consultation with Lah</h1>
                         </header>
+
                     </div>
                 </section>
 
                 <div id="main">
                   <section id="one">
                     <div className="inner">
+                      <div>
+                        <p>
+                          <strong>If you feel drawn to do some work with me please read the following:</strong>
+                        </p>
+                        <p>
+                          I am based in my office &amp; Makosini at my home in Hout Bay, Cape Town, South Africa. I also travel extensively Nationally and Internationally for work when called to. I work effectively from distance with and without the use of internet – Zoom and Skype for Bula, Steam and Fire works, and the investigative parts of Earth Works.
+                        </p>
+                        <p>
+                          If you would like to briefly ask me some questions to find out more, please book in a free 15 min Skype Session by following the link below.
+                        </p>
+                        <ul><li><a href="https://lah-hallah.netlify.com/consultation-bookings">15 min free Consultation with Lah.</a></li></ul>
+                        <p>
+                          If you know you know you would like to work with me, and do not have questions up front it is important for you to know that:
+                        </p>
+                        <ul>
+                          <li>
+                            I like to throw the Bones first to look into the impact that your morphogenetic field of Ancestors and Soul is having in your current story relative to what you are coming to me with, and to see with greatest clarity the role I can play to support your aim with highest integrity. Eg Certain of the teachings I bring to students are not able to land well and root deeply if disruptive Ancestral patterning is in the way, so cleaning is needed. Note: the prices of treatments aren’t included in the price of the Bula. Bula can be a powerful healing session on its own.
+                          </li>
+                          <li>
+                            When working with you my intention is to open what’s closed and remove obstacles to support you in reaching your own highest potential, and creative expression within the community of Life - to help you find your ‘Voice'
+                          </li>
+                          <li>
+                            If I am required to travel for the work I am doing for you my travel expense are additional.
+                          </li>
+                        </ul>
+                      </div>
                       <form method="post" action="#">
                           <div className="grid-wrapper">
                               <div className="col-6">
