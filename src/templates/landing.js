@@ -27,7 +27,7 @@ class Landing extends Component {
 
   render() {
 
-    const { header, desc } = this.props.data.prismicLanding.data
+    const { header, desc, img } = this.props.data.prismicLanding.data
     //const { description } = this.props.data.contentfulLandingSection.description
 
     return (
@@ -37,7 +37,7 @@ class Landing extends Component {
             <meta name="description" content="Landing Page" />
         </Helmet>
 
-        <BannerLanding title={header.text} description={desc.text}/>
+        <BannerLanding title={header.text} description={desc.text} img={img.url}/>
 
         <div id="main">
 {      /**      <section id="one">
@@ -121,6 +121,9 @@ query ($slugs: String!) {
        html
        text
      }
+     img{
+       url
+     }
      section {
             html
             text
@@ -128,7 +131,7 @@ query ($slugs: String!) {
    }
  }
 
-  allPrismicLandingsection (filter:{tags: {eq: $slugs} }){
+  allPrismicLandingsection (sort:{fields: data___order, order:ASC} filter:{tags: {eq: $slugs} }){
     edges{
       node{
         uid

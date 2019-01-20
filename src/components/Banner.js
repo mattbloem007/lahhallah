@@ -18,13 +18,16 @@ const Banner = ({data}) => {
                 html
                 text
               }
+              img {
+                url
+              }
             }
           }
         }
         `}
 
         render={data => (
-          <section id="banner" className="major">
+          <section id="banner" className="major" style={{backgroundImage: "url(" + data.prismicBanner.data.img.url + ")"}}>
               <div className="inner">
                   <header className="major">
                       <h1>{data.prismicBanner.data.header.text}</h1>

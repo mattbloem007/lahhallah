@@ -9,7 +9,6 @@ import moment from "moment";
 import pic11 from '../assets/images/pic11.jpg'
 const localizer = Calendar.momentLocalizer(moment);
 
-
 class Generic extends Component {
 
   componentDidMount() {
