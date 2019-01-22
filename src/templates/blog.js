@@ -56,7 +56,7 @@ class Blog extends React.Component {
                             <article key={edge.node.id} style={{backgroundImage: `url(${edge.node.data.img.url})`}}>
                                 <header className="major">
                                     <h3>{edge.node.data.header.text}</h3>
-                                    <p>{edge.node.data.blogpost.text}</p>
+                                    <p>{edge.node.data.desc.text}</p>
                                 </header>
                                 <Link to= {"/" + edge.node.uid} className="link primary"></Link>
                             </article>
@@ -104,6 +104,10 @@ query ($slugs: String!) {
       id
       data{
         header {
+          html
+          text
+        }
+        desc {
           html
           text
         }
